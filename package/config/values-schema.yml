@@ -1,0 +1,9 @@
+#@data/values-schema
+---
+
+#@schema/desc "Configuration for the default in-memory broker"
+default_broker:
+  #@schema/desc "Whether to install the default in-memory broker"
+  enabled: false
+  #@schema/desc "The namespace where to install the default broker"
+  namespace: default
