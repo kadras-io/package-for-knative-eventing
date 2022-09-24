@@ -192,9 +192,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_ORG_PAT }}
         run: |
-          mv -f artifacts/${{ env.VERSION }}.yml kadras-packages/repo/packages/knative-eventing.packages.kadras.io/${{ env.VERSION }}.yml
-          mv -f artifacts/metadata.yml kadras-packages/repo/packages/knative-eventing.packages.kadras.io/metadata.yml
+          package_path=kadras-packages/repo/packages/knative-eventing.packages.kadras.io
+          if [ ! -f ${package_path} ]; then
+            mkdir -p ${package_path}
+          fi
 
+          mv -f artifacts/${{ env.VERSION }}.yml ${package_path}/${{ env.VERSION }}.yml
+          mv -f artifacts/metadata.yml ${package_path}/metadata.yml
+          
           cd kadras-packages
 
           git config user.name github-actions
