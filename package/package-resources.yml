@@ -5,6 +5,7 @@ metadata:
   name: knative-eventing.packages.kadras.io.0.0.0
 spec:
   refName: knative-eventing.packages.kadras.io
+  releaseNotes: https://github.com/knative/eventing/releases
   releasedAt: null
   template:
     spec:
