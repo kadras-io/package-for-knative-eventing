@@ -4,6 +4,8 @@ metadata:
   creationTimestamp: null
   name: knative-eventing.packages.kadras.io.0.0.0
 spec:
+  licenses:
+  - Apache 2.0
   refName: knative-eventing.packages.kadras.io
   releaseNotes: https://github.com/knative/eventing/releases
   releasedAt: null
