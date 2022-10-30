@@ -1,12 +1,9 @@
 #@ load("@ytt:data", "data")
 
-#@ if data.values.default_broker.enabled:
-
+#@ if/end data.values.default_broker.enabled:
 ---
 apiVersion: eventing.knative.dev/v1
 kind: Broker
 metadata:
   name: default
   namespace: #@ data.values.default_broker.namespace
-
-#@ end

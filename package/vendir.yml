@@ -8,6 +8,7 @@ directories:
     includePaths:
     - eventing-crds.yaml
     - eventing.yaml
+    - eventing-sugar-controller.yaml
     path: .
   path: config/upstream
 kind: Config
