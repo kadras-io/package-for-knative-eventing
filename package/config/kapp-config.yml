@@ -1,0 +1,88 @@
+#@ load("@ytt:data", "data")
+
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+
+minimumRequiredVersion: 0.50.0
+
+#! Rebase rules explicitly define how kapp should merge resources during an update.
+#! See more about the resource merge method: https://carvel.dev/kapp/docs/latest/merge-method.
+rebaseRules:
+
+#! These Secrets are created empty and populated by Knative Eventing with TLS certificates.
+- path: [data]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - kindNamespaceNameMatcher:
+      kind: Secret
+      namespace: knative-eventing
+      name: eventing-webhook-certs
+- path: [data]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - kindNamespaceNameMatcher:
+      kind: Secret
+      namespace: knative-eventing
+      name: inmemorychannel-webhook-certs
+
+#! The HorizontalPodAutoscaler updates the replicas on Deployments
+#! and we want to keep them between upgrades.
+- path: [spec, replicas]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apps/v1, kind: Deployment}
+
+#! By default, the changes applied by users to the ConfigMaps used by Knative Eventing
+#! are persisted between upgrades.
+- path: [data]
+  type: copy
+  sources: [existing, new]
+  resourceMatchers:
+  - andMatcher:
+      matchers:
+      - apiVersionKindMatcher: {apiVersion: v1, kind: ConfigMap}
+      - hasNamespaceMatcher:
+          names:
+          - knative-eventing
+
+#! When upgrading, we persist the changes applied to the ConfigMaps used by Knative Eventing,
+#! but we want to get the new examples applied from the new version.
+- path: [data, _example]
+  type: remove
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: v1, kind: ConfigMap}
+- path: [data, _example]
+  type: copy
+  sources: [new]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: v1, kind: ConfigMap}
+
+#! This webhook configuration is populated by Knative Eventing.
+#! We want to persist those changes between upgrades.
+- paths:
+  - [spec, conversion, webhook, clientConfig, service, path]
+  - [spec, conversion, webhook, clientConfig, service, port]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: apiextensions.k8s.io/v1, kind: CustomResourceDefinition}
+
+#! These webhook configurations are populated by Knative Eventing.
+#! We want to persist those changes between upgrades.
+- paths:
+  - [webhooks, {allIndexes: true}, clientConfig, service, path]
+  - [webhooks, {allIndexes: true}, clientConfig, service, port]
+  - [webhooks, {allIndexes: true}, matchPolicy]
+  - [webhooks, {allIndexes: true}, namespaceSelector]
+  - [webhooks, {allIndexes: true}, objectSelector]
+  - [webhooks, {allIndexes: true}, reinvocationPolicy]
+  - [webhooks, {allIndexes: true}, rules]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: admissionregistration.k8s.io/v1, kind: MutatingWebhookConfiguration}
+  - apiVersionKindMatcher: {apiVersion: admissionregistration.k8s.io/v1, kind: ValidatingWebhookConfiguration}
