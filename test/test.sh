@@ -12,12 +12,6 @@ while [ $(kubectl get configmap --no-headers | wc -l) -eq 0 ] ; do
   sleep 3
 done
 
-echo -e "\n🔌 Installing test dependencies..."
-
-if [ -f test/test-dependencies ]; then
-  kapp deploy -a test-dependencies -f test/test-dependencies -y
-fi
-
 echo -e "📦 Deploying Carvel package...\n"
 
 cd package
@@ -38,9 +32,9 @@ echo -e "💾 Installing default broker..."
 
 kapp deploy -a test-data -f test/test-data -y
 
-# kubectl wait \
-#   --for=condition=ready broker/default \
-#   --timeout=30s
+kubectl wait \
+  --for=condition=ready broker/default \
+  --timeout=30s
 
 echo -e "🎮 Verifying default broker..."
 
