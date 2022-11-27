@@ -81,6 +81,7 @@ rebaseRules:
   - [webhooks, {allIndexes: true}, objectSelector]
   - [webhooks, {allIndexes: true}, reinvocationPolicy]
   - [webhooks, {allIndexes: true}, rules]
+  - [webhooks, {allIndexes: true}, sideEffects]
   type: copy
   sources: [new, existing]
   resourceMatchers:
