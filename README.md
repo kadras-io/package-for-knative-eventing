@@ -1,5 +1,7 @@
 # Knative Eventing
 
+<a href="https://slsa.dev/spec/v0.1/levels"><img src="https://slsa.dev/images/gh-badge-level3.svg" alt="The SLSA Level 3 badge"></a>
+
 This project provides a [Carvel package](https://carvel.dev/kapp-controller/docs/latest/packaging) for [Knative Eventing](https://knative.dev/docs/eventing), a solution for routing events from event producers to sinks, enabling developers to use an event-driven architecture with their applications.
 
 ## Prerequisites
@@ -29,7 +31,7 @@ Then, install the Knative Eventing package.
   ```shell
   kctrl package install -i knative-eventing \
     -p knative-eventing.packages.kadras.io \
-    -v 1.8.1+kadras.1 \
+    -v 1.8.3 \
     -n kadras-packages
   ```
 
@@ -71,7 +73,7 @@ Then, reference it from the `kctrl` command when installing or upgrading the pac
   ```shell
   kctrl package install -i knative-eventing \
     -p knative-eventing.packages.kadras.io \
-    -v 1.8.1+kadras.1 \
+    -v 1.8.3 \
     -n kadras-packages \
     --values-file values.yml
   ```
@@ -111,6 +113,6 @@ For support and documentation specific to Knative Eventing, check out [knative.d
 
 ## Supply Chain Security
 
-This project is compliant with level 2 of the [SLSA Framework](https://slsa.dev).
+This project is compliant with level 3 of the [SLSA Framework](https://slsa.dev).
 
-<img src="https://slsa.dev/images/SLSA-Badge-full-level2.svg" alt="The SLSA Level 2 badge" width=200>
+<img src="https://slsa.dev/images/SLSA-Badge-full-level3.svg" alt="The SLSA Level 3 badge" width=200>
