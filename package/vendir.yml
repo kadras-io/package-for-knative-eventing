@@ -4,7 +4,7 @@ directories:
   - githubRelease:
       disableAutoChecksumValidation: true
       slug: knative/eventing
-      tag: knative-v1.8.3
+      tag: knative-v1.8.4
     includePaths:
     - eventing-crds.yaml
     - eventing.yaml
