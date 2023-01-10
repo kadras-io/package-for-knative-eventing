@@ -31,7 +31,7 @@ Then, install the Knative Eventing package.
   ```shell
   kctrl package install -i knative-eventing \
     -p knative-eventing.packages.kadras.io \
-    -v 1.8.3 \
+    -v 1.8.4 \
     -n kadras-packages
   ```
 
@@ -73,7 +73,7 @@ Then, reference it from the `kctrl` command when installing or upgrading the pac
   ```shell
   kctrl package install -i knative-eventing \
     -p knative-eventing.packages.kadras.io \
-    -v 1.8.3 \
+    -v 1.8.4 \
     -n kadras-packages \
     --values-file values.yml
   ```
