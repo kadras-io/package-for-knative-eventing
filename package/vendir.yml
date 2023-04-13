@@ -4,11 +4,9 @@ directories:
   - githubRelease:
       disableAutoChecksumValidation: true
       slug: knative/eventing
-      tag: knative-v1.8.4
+      tag: knative-v1.9.7
     includePaths:
-    - eventing-crds.yaml
     - eventing.yaml
-    - eventing-sugar-controller.yaml
     path: .
   path: config/upstream
 kind: Config

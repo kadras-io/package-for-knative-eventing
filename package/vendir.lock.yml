@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - githubRelease:
-      tag: knative-v1.8.4
-      url: https://api.github.com/repos/knative/eventing/releases/87298702
+      tag: knative-v1.9.7
+      url: https://api.github.com/repos/knative/eventing/releases/94756176
     path: .
   path: config/upstream
 kind: LockConfig

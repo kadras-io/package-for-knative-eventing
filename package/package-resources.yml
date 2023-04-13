@@ -7,12 +7,14 @@ spec:
   licenses:
   - Apache 2.0
   refName: knative-eventing.packages.kadras.io
-  releaseNotes: https://github.com/knative/eventing/releases
+  releaseNotes: https://github.com/kadras-io/package-for-knative-eventing/releases
   releasedAt: null
   template:
     spec:
       deploy:
-      - kapp: {}
+      - kapp:
+          rawOptions:
+          - --wait-timeout=5m
       fetch:
       - git: {}
       template:
@@ -21,22 +23,7 @@ spec:
           - config
       - kbld: {}
   valuesSchema:
-    openAPIv3:
-      additionalProperties: false
-      properties:
-        default_broker:
-          additionalProperties: false
-          description: Configuration for the default in-memory broker
-          properties:
-            enabled:
-              default: false
-              description: Whether to install the default in-memory broker
-              type: boolean
-            namespace:
-              default: default
-              description: The namespace where to install the default broker
-              type: string
-          type: object
+    openAPIv3: {}
   version: 0.0.0
 
 ---
@@ -56,6 +43,8 @@ spec:
   - name: Thomas Vitale
   providerName: Kadras
   shortDescription: Toolkit to build event-driven architectures on Kubernetes.
+  supportDescription: Go to https://kadras.io for documentation and https://github.com/kadras-io/package-for-knative-eventing
+    for community support.
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
