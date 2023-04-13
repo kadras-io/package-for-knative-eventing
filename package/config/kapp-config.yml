@@ -28,15 +28,15 @@ rebaseRules:
       namespace: knative-eventing
       name: inmemorychannel-webhook-certs
 
-#! The HorizontalPodAutoscaler updates the replicas on Deployments
-#! and we want to keep them between upgrades.
+#! The HorizontalPodAutoscaler updates the replicas on Deployments.
+#! We want to keep that configuration between upgrades.
 - path: [spec, replicas]
   type: copy
   sources: [existing, new]
   resourceMatchers:
   - apiVersionKindMatcher: {apiVersion: apps/v1, kind: Deployment}
 
-#! By default, the changes applied by users to the ConfigMaps used by Knative Eventing
+#! Changes applied by users to the ConfigMaps for which this package doesn't provide overlays
 #! are persisted between upgrades.
 - path: [data]
   type: copy
@@ -49,8 +49,8 @@ rebaseRules:
           names:
           - knative-eventing
 
-#! When upgrading, we persist the changes applied to the ConfigMaps used by Knative Eventing,
-#! but we want to get the new examples applied from the new version.
+#! When upgrading one of the ConfigMaps above, we prefer the changes applied to the cluster,
+#! but we want to get the new example values from the new version.
 - path: [data, _example]
   type: remove
   resourceMatchers:
