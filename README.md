@@ -6,6 +6,9 @@
 [![The Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Follow us on Twitter](https://img.shields.io/static/v1?label=Twitter&message=Follow&color=1DA1F2)](https://twitter.com/kadrasIO)
 
+> **Warning**
+> This package has been archived. For event-driven features based on CloudEvents, you can choose [Dapr](https://github.com/kadras-io/package-for-dapr), supported out-of-the-box by Kadras, or bring your own Knative Eventing package.
+
 A Carvel package for [Knative Eventing](https://knative.dev/docs/eventing), a cloud-native solution for routing events from event producers to sinks, enabling developers to use an event-driven architecture with their applications.
 
 ## 🚀&nbsp; Getting Started
